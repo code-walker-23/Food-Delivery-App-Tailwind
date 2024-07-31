@@ -10,15 +10,38 @@ const RestaurantCard = (props) => {
     costForTwo,
     cloudinaryImageId,
     sla,
+    isOpen,
+    aggregatedDiscountInfoV3
   } = resData?.info;
+
   const { deliveryTime } = sla;
+  const { header, subHeader } = aggregatedDiscountInfoV3 || {};
 
   // Convert avgRating to a number and round it to the nearest whole number
   const rating = Math.round(parseFloat(avgRating));
-  const starEmoji = '✪'; // Star emoji for rating
+  const starEmoji = "✪"; // Star emoji for rating
 
   return (
-    <div className="max-w-sm mx-auto bg-white rounded-3xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
+    <div className="relative max-w-sm mx-auto bg-white rounded-3xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
+      {/* Status Label */}
+      <div
+        className={`absolute top-4 left-4 px-3 py-1 text-white font-bold text-xs rounded-full shadow-lg ${
+          isOpen ? 'bg-green-600' : 'bg-red-600'
+        }`}
+      >
+        {isOpen ? 'Opened' : 'Closed'}
+      </div>
+      
+      {/* Discount Info */}
+      {aggregatedDiscountInfoV3 && (
+        <div
+          className="absolute top-4 right-4 px-3 py-1 text-white font-bold text-xs rounded-full bg-blue-600 shadow-lg"
+        >
+          <span>{header}</span>
+          {subHeader && <span className="block text-xs">{subHeader}</span>}
+        </div>
+      )}
+      
       <div
         className="h-64 bg-cover bg-center bg-gray-200"
         style={{ backgroundImage: `url(${IMAGE_URL + cloudinaryImageId})` }}
@@ -38,11 +61,16 @@ const RestaurantCard = (props) => {
             <span className="ml-2 text-lg font-semibold">{avgRating}</span>
           </div>
         </div>
-        <p className="text-gray-700 text-sm mb-2 truncate" title={cuisines.join(', ')}>
-          {cuisines.join(', ')}
+        <p
+          className="text-gray-700 text-sm mb-2 truncate"
+          title={cuisines.join(", ")}
+        >
+          {cuisines.join(", ")}
         </p>
         <p className="text-gray-600 text-sm mb-2">{locality}</p>
-        <p className="text-gray-600 text-sm mb-2">Delivery in {deliveryTime} mins</p>
+        <p className="text-gray-600 text-sm mb-2">
+          Delivery in {deliveryTime} mins
+        </p>
         <p className="text-gray-800 font-semibold">{costForTwo}</p>
       </div>
     </div>

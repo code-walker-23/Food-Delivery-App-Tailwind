@@ -37,6 +37,12 @@ const Header = () => {
 
         <nav className="nav-items flex space-x-6">
           <Link
+            to="/main/"
+            className="text-white hover:text-gray-300 transition duration-300 text-lg font-medium"
+          >
+            Home
+          </Link>
+          <Link
             to="/main/location"
             className="text-white hover:text-gray-300 transition duration-300 text-lg font-medium"
           >

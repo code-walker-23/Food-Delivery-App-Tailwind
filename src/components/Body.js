@@ -16,7 +16,8 @@ import {
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCityAPI, setSelectedCityAPI] = useState(SWIGGY_API);
+  const [selectedCityAPI, setSelectedCityAPI] = useState(SWIGGY_API_AGRA);
+  const [selectedCity, setSelectedCity] = useState("Agra");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,19 +44,33 @@ const Body = () => {
     return <OfflineComponent />;
   }
 
+  const handleCityChange = (api, cityName) => {
+    setSelectedCityAPI(api);
+    setSelectedCity(cityName);
+  };
+
   return (
     <div className="p-4 md:p-6 bg-gray-100 min-h-screen mt-8">
       <div className="mb-6 flex flex-wrap gap-4 justify-center">
         <Link to="/main/cities">
           <Button label="Search Cities" />
         </Link>
-        <ButtonFilter onClick={() => setSelectedCityAPI(SWIGGY_API)} label="All" />
-        <ButtonFilter onClick={() => setSelectedCityAPI(SWIGGY_API_AGRA)} label="Agra" />
-        <ButtonFilter onClick={() => setSelectedCityAPI(SWIGGY_API_HYD)} label="Hyderabad" />
-        <ButtonFilter onClick={() => setSelectedCityAPI(SWIGGY_API_KOLKATA)} label="Kolkata" />
-        <ButtonFilter onClick={() => setSelectedCityAPI(SWIGGY_API_MUM)} label="Mumbai" />
-        <ButtonFilter onClick={() => setSelectedCityAPI(SWIGGY_API_DELHI)} label="Delhi" />
+        <ButtonFilter onClick={() => handleCityChange(SWIGGY_API, "Bangalore")} label="Bangalore" />
+        <ButtonFilter onClick={() => handleCityChange(SWIGGY_API_AGRA, "Agra")} label="Agra" />
+        <ButtonFilter onClick={() => handleCityChange(SWIGGY_API_HYD, "Hyderabad")} label="Hyderabad" />
+        <ButtonFilter onClick={() => handleCityChange(SWIGGY_API_KOLKATA, "Kolkata")} label="Kolkata" />
+        <ButtonFilter onClick={() => handleCityChange(SWIGGY_API_MUM, "Mumbai")} label="Mumbai" />
+        <ButtonFilter onClick={() => handleCityChange(SWIGGY_API_DELHI, "Delhi")} label="Delhi" />
       </div>
+
+      {/* Enhanced Heading */}
+      <div className="mb-8 text-center">
+        <h2 className="text-3xl font-extrabold text-gray-800 mb-2">
+          Top Rated Restaurants
+        </h2>
+        <p className="text-lg text-gray-600">{`From ${selectedCity}`}</p>
+      </div>
+
       {loading ? (
         <Shimmer />
       ) : (

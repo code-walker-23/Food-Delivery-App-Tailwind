@@ -8,9 +8,9 @@ import OfflineComponent from "../../utils/offlineComponent";
 
 const Search = () => {
   const [resFilter, setListOfRestaurant] = useState([]);
-  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
+  let filteredRestaurant = null;
 
   useEffect(() => {
     fetchData();
@@ -23,17 +23,13 @@ const Search = () => {
       json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
     setListOfRestaurant(res1);
-    setFilteredRestaurant(res1);
+    filteredRestaurant = res1;
     setLoading(false);
   };
 
-  function handleSearch() {
-    setFilteredRestaurant(
-      resFilter.filter((res) =>
-        res.info.name.toLowerCase().includes(searchText.toLowerCase())
-      )
-    );
-  }
+  filteredRestaurant = resFilter.filter((res) =>
+    res.info.name.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   const onlineStatus = useOnlineStatus();
 
@@ -51,31 +47,31 @@ const Search = () => {
             placeholder="Search for restaurants..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                handleSearch();
-              }
-            }}
             className="flex-grow px-4 py-2 border-none outline-none focus:ring-2 focus:ring-gray-500"
           />
-          <button
+          
+          {/* <button
             className="bg-gray-600 text-white px-6 py-2 rounded-r-lg hover:bg-gray-700 transition duration-300"
             onClick={handleSearch}
           >
             Search
-          </button>
+          </button> */}
         </div>
       </div>
 
       {loading ? (
         <Shimmer />
       ) : filteredRestaurant.length === 0 ? (
-        <div className="text-center text-gray-600 text-xl">No Restaurant Found</div>
+        <div className="text-center text-gray-600 text-xl">
+          No Restaurant Found
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl">
           {filteredRestaurant.map((restaurant) => (
-            <Link key={restaurant.info.id} to={`/main/restaurants/${restaurant.info.id}`}>
+            <Link
+              key={restaurant.info.id}
+              to={`/main/restaurants/${restaurant.info.id}`}
+            >
               <RestaurantCard resData={restaurant} />
             </Link>
           ))}

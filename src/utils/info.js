@@ -287,3 +287,25 @@ useEffect is used to run the side effects in the function component.
 // 2. Whenever we create the instance of the class based component the render method is called.
 // 3. Whenever we create the instance of the class based component the componentDidMount method is called.
 // 4. Whenever we create the instance of the class based component the componentDidUpdate method is called.
+
+
+
+
+/* 
+
+
+Higher Order Component : It is a function which takes a component as an argument and returns a new component.
+
+Higher Order Component is a design pattern in React which is used to share the common functionality between the components.
+
+Taking the function as an arguement and adding some functionality to it and returning the new function is called Higher Order Function.
+
+In swiggy there are some restaurant cards which are promoted so we will send the restaurant card as an argument to the higher order component and it will add some functionality to it and return the new component with some additional functionality(Promoted).
+
+
+
+
+
+
+
+*/
