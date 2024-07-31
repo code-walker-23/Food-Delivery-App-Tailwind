@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+/* Shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer-wrapper {
+  margin-top: 4rem; /* Add margin-top to ensure it doesn't overlap the header */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.shimmer-card {
+  background: #f6f7f8;
+  background-image: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.shimmer-card-image {
+  height: 200px;
+  background-color: #e0e0e0;
+}
+
+.shimmer-card-details {
+  padding: 1rem;
+}
+
+.shimmer-line {
+  height: 16px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.shimmer-line.long {
+  width: 75%;
+}
+
+.shimmer-line.medium {
+  width: 50%;
+}
+
+.shimmer-line.short {
+  width: 25%;
+}
+
+
+
+
+/* restaurant card */
+
+
+
+
