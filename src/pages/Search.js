@@ -20,7 +20,7 @@ const Search = () => {
     const data = await fetch(SWIGGY_API);
     const json = await data.json();
     const res1 =
-      json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      json.data.cards[0]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
     setListOfRestaurant(res1);
     filteredRestaurant = res1;

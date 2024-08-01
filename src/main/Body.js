@@ -25,10 +25,33 @@ const Body = () => {
       try {
         const response = await fetch(selectedCityAPI);
         const json = await response.json();
-        const restaurants =
+        const restaurants0 =
+          json.data.cards[0]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants || [];
+        const restaurants1 =
           json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
             ?.restaurants || [];
-        setListOfRestaurants(restaurants);
+        const restaurants2 =
+          json.data.cards[2]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants || [];
+        const restaurants3 =
+          json.data.cards[3]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants || [];
+        const restaurants = [
+          ...restaurants0,
+          ...restaurants1,
+          ...restaurants2,
+          ...restaurants3,
+        ];
+        const uniqueRestaurants = Array.from(
+          new Set(restaurants.map((r) => r.info.id))
+        ).map((id) => restaurants.find((r) => r.info.id === id));
+        console.log("restaurant0", restaurants0);
+        console.log("restaurant1", restaurants1);
+        console.log("restaurant2", restaurants2);
+        console.log("restaurant3", restaurants3);
+        console.log("uniqueRestaurants", uniqueRestaurants);
+        setListOfRestaurants(uniqueRestaurants);
       } catch (error) {
         console.error("Failed to fetch data:", error);
       } finally {
@@ -129,3 +152,58 @@ const ButtonFilter = ({ onClick, label }) => (
 );
 
 export default Body;
+
+/* 
+
+Props Drilling : In React, the process of passing data from one component to another component is called props drilling. It is a common pattern in React to pass data from a parent component to a child component. However, when the data needs to be passed to multiple levels of nested components, it can become cumbersome and lead to code complexity.
+
+In props drilling, data is passed down through multiple levels of nested components by passing props from parent components to child components. This can lead to a lot of boilerplate code and make the code harder to maintain.
+
+React Context API : The Context API is a feature in React that allows components to share data without having to pass props manually at every level of the component tree. It provides a way to pass data through the component tree without having to pass props down manually at every level.
+
+React Context Advantages : The Context API in React provides several advantages for managing global state in an application:
+
+1. Avoids prop drilling: The Context API allows data to be passed down through the component tree without having to pass props manually at every level. This can help reduce boilerplate code and make the codebase more maintainable.
+
+2. Centralized state management: The Context API provides a centralized way to manage global state in an application. This can help simplify state management and make it easier to share data between components.
+
+3. Provider and Consumer components: The Context API provides Provider and Consumer components that allow data to be shared between components. The Provider component is used to provide data to the component tree, while the Consumer component is used to access the data.
+
+4. Hooks support: The Context API supports the use of hooks, such as useContext and useReducer, to access and update the shared data. This can help simplify data fetching and updating in components.
+
+5. Performance optimizations: The Context API provides optimizations, such as memoization and lazy loading, to improve performance when accessing and updating shared data. This can help reduce unnecessary re-renders and improve the overall performance of the application.
+
+React Context Disadvantages : The Context API in React also has some disadvantages that developers should be aware of:
+
+1. Complexity: The Context API can introduce complexity to the codebase, especially when managing multiple contexts and providers. This can make the code harder to understand and maintain.
+
+2. Global state management: The Context API promotes the use of global state management, which can lead to issues with data consistency and debugging. It is important to carefully manage the shared data to avoid unexpected behavior.
+
+3. Performance overhead: The Context API can introduce performance overhead, especially when using multiple contexts and providers. This can impact the performance of the application and lead to slower rendering times.
+
+4. Limited use cases: The Context API is not suitable for all use cases, such as managing complex state or handling asynchronous data fetching. In such cases, other state management libraries, such as Redux or React Query, may be more suitable.
+
+5. Learning curve: The Context API has a learning curve, especially for developers who are new to React. It is important to understand the concepts and best practices of using the Context API to avoid common pitfalls and issues.
+
+
+
+
+
+Context API : The Context API is a feature in React that allows components to share data without having to pass props manually at every level of the component tree. It provides a way to pass data through the component tree without having to pass props down manually at every level.
+
+Redux : Redux is a state management library for JavaScript applications, primarily used with React. It helps manage the state of an application in a predictable and centralized way. Redux provides a global store that holds the state of the entire application, and components can access and update the state using actions and reducers.
+
+React Query : React Query is a library for managing server state in React applications. It provides hooks and utilities for fetching, caching, and updating data from APIs. React Query simplifies data fetching and caching, and provides a consistent way to manage server state in React applications.
+
+Apollo Client : Apollo Client is a state management library for managing data in React applications. It is primarily used with GraphQL APIs and provides tools for fetching, caching, and updating data from GraphQL servers. Apollo Client simplifies data fetching and caching, and provides a consistent way to manage data in React applications.
+
+
+
+
+
+
+
+
+
+
+*/
