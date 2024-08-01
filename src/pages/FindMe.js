@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import FindMe from "../components/pages/FindMe"; // Adjust the path if necessary
+import FetchRestaurantLatLong from "../components/FetchRestaurantLatLong"; // Adjust the path if necessary
 
-const LocationComponent = () => {
+const FindMe = () => {
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
 
@@ -36,12 +36,14 @@ const LocationComponent = () => {
         Find Nearby Restaurants
       </button>
       {location ? (
-        <FindMe latitude={location.latitude} longitude={location.longitude} />
+        <FetchRestaurantLatLong latitude={location.latitude} longitude={location.longitude} />
       ) : (
-        error && <p className="error-message text-red-600 text-lg mt-4">{error}</p>
+        error && (
+          <p className="error-message text-red-600 text-lg mt-4">{error}</p>
+        )
       )}
     </div>
   );
 };
 
-export default LocationComponent;
+export default FindMe;

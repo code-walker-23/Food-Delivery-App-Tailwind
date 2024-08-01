@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Shimmer } from "../../utils/Shimmer";
-import { IMAGE_URL } from "../../utils/constants";
-import { renderStars } from "../../utils/star";
+import { Shimmer } from "../utils/Shimmer";
+import { IMAGE_URL } from "../utils/constants";
 import { useParams } from "react-router-dom";
-import useRestaurantMenu from "../../hooks/useRestaurantMenu";
-import OfflineComponent from "../../utils/offlineComponent";
-import useOnlineStatus from "../../hooks/useOnlineStatus";
+import useRestaurantMenu from "../hooks/useRestaurantMenu";
+import OfflineComponent from "../utils/offlineComponent";
+import useOnlineStatus from "../hooks/useOnlineStatus";
 
 const Menu = () => {
   const [selectedAddons, setSelectedAddons] = useState(null);
@@ -23,7 +22,7 @@ const Menu = () => {
         handleCloseAddons();
       }
     };
-    
+
     window.addEventListener("keydown", handleEscape);
     return () => {
       window.removeEventListener("keydown", handleEscape);
@@ -59,7 +58,8 @@ const Menu = () => {
   const { deliveryTime } = sla || {};
   const { nextCloseTime, opened } = availability || {};
   const { header, subHeader } = aggregatedDiscountInfoV2 || {};
-  const { offers } = resInfo?.cards[3]?.card?.card?.gridElements?.infoWithStyle || [];
+  const { offers } =
+    resInfo?.cards[3]?.card?.card?.gridElements?.infoWithStyle || [];
   console.log(offers);
 
   const img_id = cloudinaryImageId || logo;
@@ -102,88 +102,95 @@ const Menu = () => {
     }
   };
 
-const renderItemCards = (items) => (
-  <ul className="menu-items grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    {items.map((item, itemIndex) => {
-      const {
-        name,
-        description,
-        imageId,
-        category,
-        inStock,
-        price,
-        defaultPrice,
-        addons,
-        ratings,
-        isVeg
-      } = item.card.info;
-      const value = price ?? defaultPrice;
-      const rating = ratings?.aggregatedRating?.rating || "0";
-      const ratingCount = ratings?.aggregatedRating?.ratingCount || "0";
-      const ratingColor = rating >= 4 ? 'bg-green-600' : 'bg-yellow-600'; // Adjust color based on rating
+  const renderItemCards = (items) => (
+    <ul className="menu-items grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {items.map((item, itemIndex) => {
+        const {
+          name,
+          description,
+          imageId,
+          category,
+          inStock,
+          price,
+          defaultPrice,
+          addons,
+          ratings,
+          isVeg,
+        } = item.card.info;
+        const value = price ?? defaultPrice;
+        const rating = ratings?.aggregatedRating?.rating || "0";
+        const ratingCount = ratings?.aggregatedRating?.ratingCount || "0";
+        const ratingColor = rating >= 4 ? "bg-green-600" : "bg-yellow-600"; // Adjust color based on rating
 
-      return (
-        <li
-          key={itemIndex}
-          className={`menu-item bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 ${
-            !inStock ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          <div className="flex flex-col">
-            {/* Image Section */}
-            <div className="relative">
-              <img
-                className="w-full h-32 object-cover rounded-t-lg"
-                src={IMAGE_URL + imageId}
-                alt={name}
-              />
-              <div
-                className={`absolute top-2 left-2 bg-${isVeg ? 'green' : 'red'}-600 text-white text-xs py-1 px-2 rounded-full`}
-              >
-                {isVeg ? 'Veg' : 'Non-Veg'}
-              </div>
-              {/* Rating Badge */}
-              {rating !== "0" && (
+        return (
+          <li
+            key={itemIndex}
+            className={`menu-item bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 ${
+              !inStock ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            <div className="flex flex-col">
+              {/* Image Section */}
+              <div className="relative">
+                <img
+                  className="w-full h-32 object-cover rounded-t-lg"
+                  src={IMAGE_URL + imageId}
+                  alt={name}
+                />
                 <div
-                  className={`absolute bottom-2 right-2 ${ratingColor} text-white text-xs py-1 px-2 rounded-full flex items-center space-x-1`}
+                  className={`absolute top-2 left-2 bg-${
+                    isVeg ? "green" : "red"
+                  }-600 text-white text-xs py-1 px-2 rounded-full`}
                 >
-                  <span>{rating}</span>
-                  <span>✪</span>
-                  <span>({ratingCount})</span>
+                  {isVeg ? "Veg" : "Non-Veg"}
                 </div>
-              )}
-            </div>
-            {/* Details Section */}
-            <div className="p-4 flex flex-col justify-between h-full">
-              <div>
-                <h4 className="text-lg font-semibold text-gray-800 mb-1">{name}</h4>
-                <p className="text-gray-600 text-sm mb-2">{description}</p>
-                <p className="text-gray-500 text-sm mb-2">Category: {category}</p>
-                <p className={`font-medium text-sm mb-2 ${!inStock ? "text-red-500" : "text-green-500"}`}>
-                  {inStock ? "Available" : "Out of Stock"}
-                </p>
-                <p className="text-xl font-bold text-gray-900 mb-3">₹{(value / 100).toFixed(2)}</p>
+                {/* Rating Badge */}
+                {rating !== "0" && (
+                  <div
+                    className={`absolute bottom-2 right-2 ${ratingColor} text-white text-xs py-1 px-2 rounded-full flex items-center space-x-1`}
+                  >
+                    <span>{rating}</span>
+                    <span>✪</span>
+                    <span>({ratingCount})</span>
+                  </div>
+                )}
               </div>
-              {addons?.length > 0 && (
-                <button
-                  className="bg-yellow-500 text-white text-xs py-1 px-3 rounded-lg hover:bg-yellow-600 transition"
-                  onClick={() => handleAddonsClick(addons)}
-                >
-                  Add+
-                </button>
-              )}
+              {/* Details Section */}
+              <div className="p-4 flex flex-col justify-between h-full">
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-800 mb-1">
+                    {name}
+                  </h4>
+                  <p className="text-gray-600 text-sm mb-2">{description}</p>
+                  <p className="text-gray-500 text-sm mb-2">
+                    Category: {category}
+                  </p>
+                  <p
+                    className={`font-medium text-sm mb-2 ${
+                      !inStock ? "text-red-500" : "text-green-500"
+                    }`}
+                  >
+                    {inStock ? "Available" : "Out of Stock"}
+                  </p>
+                  <p className="text-xl font-bold text-gray-900 mb-3">
+                    ₹{(value / 100).toFixed(2)}
+                  </p>
+                </div>
+                {addons?.length > 0 && (
+                  <button
+                    className="bg-yellow-500 text-white text-xs py-1 px-3 rounded-lg hover:bg-yellow-600 transition"
+                    onClick={() => handleAddonsClick(addons)}
+                  >
+                    Add+
+                  </button>
+                )}
+              </div>
             </div>
-          </div>
-        </li>
-      );
-    })}
-  </ul>
-);
-
-  
-  
-  
-  
+          </li>
+        );
+      })}
+    </ul>
+  );
 
   const renderCategories = (categories, sectionIndex) => (
     <div className="categories-section mt-6">
@@ -191,7 +198,10 @@ const renderItemCards = (items) => (
         const { title, itemCards } = category;
         return (
           itemCards.length > 0 && (
-            <div key={categoryIndex} className="category-section border-t border-gray-300 pt-4">
+            <div
+              key={categoryIndex}
+              className="category-section border-t border-gray-300 pt-4"
+            >
               <h4
                 className="text-xl font-semibold text-gray-700 cursor-pointer mb-2"
                 onClick={() => toggleCategory(sectionIndex, categoryIndex)}
@@ -217,7 +227,10 @@ const renderItemCards = (items) => (
 
     return (
       (itemCards?.length > 0 || categories?.length > 0) && (
-        <div key={index} className="menu-section border-b border-gray-300 pb-6 mb-6">
+        <div
+          key={index}
+          className="menu-section border-b border-gray-300 pb-6 mb-6"
+        >
           <h3
             className="text-2xl font-bold text-gray-800 cursor-pointer mb-4"
             onClick={() => toggleSection(index)}
@@ -243,7 +256,10 @@ const renderItemCards = (items) => (
         {offers.map((offer, index) => {
           const { couponCode, description, header } = offer.info || {};
           return (
-            <div key={index} className="offer-card bg-yellow-50 p-4 rounded-lg shadow-md">
+            <div
+              key={index}
+              className="offer-card bg-yellow-50 p-4 rounded-lg shadow-md"
+            >
               <div className="flex justify-between items-center mb-2">
                 <h3 className="text-xl font-bold text-yellow-600">{header}</h3>
                 <span className="text-sm bg-yellow-200 text-yellow-600 py-1 px-2 rounded-full">
@@ -269,7 +285,9 @@ const renderItemCards = (items) => (
             alt="Restaurant Logo"
           />
           <div className="restaurant-details flex-1 text-center lg:text-left">
-            <h2 className="text-4xl font-extrabold text-gray-800 mb-2">{name}</h2>
+            <h2 className="text-4xl font-extrabold text-gray-800 mb-2">
+              {name}
+            </h2>
             <h3 className="text-2xl text-gray-600 mb-1">{city}</h3>
             <h4 className="text-xl text-gray-500 mb-2">{areaName}</h4>
             <div className="rating-and-delivery flex flex-col lg:flex-row justify-center lg:justify-start items-center mb-4">
@@ -294,7 +312,9 @@ const renderItemCards = (items) => (
         </div>
         {header && (
           <div className="discount-info mt-4 bg-blue-600 text-white p-2 rounded-lg">
-            <h5 className="font-semibold">{header} {subHeader}</h5>
+            <h5 className="font-semibold">
+              {header} {subHeader}
+            </h5>
           </div>
         )}
       </div>
@@ -320,16 +340,23 @@ const renderItemCards = (items) => (
                 } = item.dish.info;
                 const value = price ?? defaultPrice;
                 return (
-                  <div key={index} className="carousel-item bg-white rounded-lg shadow-lg p-4 flex-none w-60">
+                  <div
+                    key={index}
+                    className="carousel-item bg-white rounded-lg shadow-lg p-4 flex-none w-60"
+                  >
                     <img
                       className="carousel-item-image w-full h-32 object-cover rounded-md mb-2"
                       src={IMAGE_URL + imageId}
                       alt={name}
                     />
-                    <h4 className="text-lg font-semibold text-gray-800 mb-1">{name}</h4>
+                    <h4 className="text-lg font-semibold text-gray-800 mb-1">
+                      {name}
+                    </h4>
                     <p className="text-gray-600 mb-1">{description}</p>
                     <p className="text-gray-500 mb-1">{category}</p>
-                    <p className="text-xl font-bold text-gray-900">₹{(value / 100).toFixed(2)}</p>
+                    <p className="text-xl font-bold text-gray-900">
+                      ₹{(value / 100).toFixed(2)}
+                    </p>
                     {addons?.length > 0 && (
                       <button
                         className="mt-2 bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600"
@@ -348,13 +375,14 @@ const renderItemCards = (items) => (
 
       {/* Menu Card */}
       <div className="menu-card bg-white rounded-lg shadow-lg p-6">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4 cursor-pointer" onClick={handleMenuToggle}>
+        <h2
+          className="text-3xl font-bold text-gray-800 mb-4 cursor-pointer"
+          onClick={handleMenuToggle}
+        >
           Menu {showMenu ? "▲" : "▼"}
         </h2>
         {showMenu && (
-          <>
-            {cards.flatMap((card, index) => renderMenuSections(card, index))}
-          </>
+          <>{cards.flatMap((card, index) => renderMenuSections(card, index))}</>
         )}
       </div>
 
@@ -372,7 +400,9 @@ const renderItemCards = (items) => (
             <div className="addon-scroll-container h-80 overflow-y-auto pr-4">
               {selectedAddons.map((addon, addonIndex) => (
                 <div key={addonIndex} className="addon-group mb-4">
-                  <h6 className="text-xl font-semibold text-gray-700 mb-2">{addon.groupName}</h6>
+                  <h6 className="text-xl font-semibold text-gray-700 mb-2">
+                    {addon.groupName}
+                  </h6>
                   <ul className="addon-choices list-disc pl-5">
                     {addon.choices.map((choice, choiceIndex) => (
                       <li key={choiceIndex} className="text-gray-600">

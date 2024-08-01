@@ -1,5 +1,5 @@
-import OfflineComponent from "../../utils/offlineComponent";
-import useOnlineStatus from "../../hooks/useOnlineStatus";
+import OfflineComponent from "../utils/offlineComponent";
+import useOnlineStatus from "../hooks/useOnlineStatus";
 
 function Contact() {
   const onlineStatus = useOnlineStatus();

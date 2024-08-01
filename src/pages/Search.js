@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import RestaurantCard from "../../utils/RestaurantCard";
-import { Shimmer } from "../../utils/Shimmer";
+import RestaurantCard from "../components/RestaurantCard";
+import { Shimmer } from "../utils/Shimmer";
 import { Link } from "react-router-dom";
-import { SWIGGY_API } from "../../utils/constants";
-import useOnlineStatus from "../../hooks/useOnlineStatus";
-import OfflineComponent from "../../utils/offlineComponent";
+import { SWIGGY_API } from "../utils/constants";
+import useOnlineStatus from "../hooks/useOnlineStatus";
+import OfflineComponent from "../utils/offlineComponent";
 
 const Search = () => {
   const [resFilter, setListOfRestaurant] = useState([]);
@@ -49,7 +49,7 @@ const Search = () => {
             onChange={(e) => setSearchText(e.target.value)}
             className="flex-grow px-4 py-2 border-none outline-none focus:ring-2 focus:ring-gray-500"
           />
-          
+
           {/* <button
             className="bg-gray-600 text-white px-6 py-2 rounded-r-lg hover:bg-gray-700 transition duration-300"
             onClick={handleSearch}

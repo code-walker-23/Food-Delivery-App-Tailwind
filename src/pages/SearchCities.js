@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { CitiesList } from "../../utils/cities"; // Adjust the path if necessary
-import RestaurantCard from "../../utils/RestaurantCard"; // Adjust the path if necessary
-import { Shimmer } from "../../utils/Shimmer"; // Adjust the path if necessary
+import { CitiesList } from "../utils/cities"; // Adjust the path if necessary
+import RestaurantCard from "../components/RestaurantCard"; // Adjust the path if necessary
+import { Shimmer } from "../utils/Shimmer"; // Adjust the path if necessary
 import { Link } from "react-router-dom";
 
-const CityComponent = () => {
+const SearchCities = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -90,4 +90,4 @@ const CityComponent = () => {
   );
 };
 
-export default CityComponent;
+export default SearchCities;

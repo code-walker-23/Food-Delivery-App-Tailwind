@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Shimmer } from '../../utils/Shimmer'; // Adjust the path if necessary
-import RestaurantCard from '../../utils/RestaurantCard'; // Adjust the path if necessary
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Shimmer } from "../utils/Shimmer"; // Adjust the path if necessary
+import RestaurantCard from "./RestaurantCard"; // Adjust the path if necessary
 
-const FindMe = ({ latitude, longitude }) => {
+const FetchRestaurantLatLong = ({ latitude, longitude }) => {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,10 +21,11 @@ const FindMe = ({ latitude, longitude }) => {
       );
       const json = await response.json();
       const fetchedRestaurants =
-        json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+        json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants || [];
       setRestaurants(fetchedRestaurants);
     } catch (error) {
-      console.error('Failed to fetch restaurants:', error);
+      console.error("Failed to fetch restaurants:", error);
     } finally {
       setLoading(false); // Stop loading
     }
@@ -61,4 +62,4 @@ const FindMe = ({ latitude, longitude }) => {
   );
 };
 
-export default FindMe;
+export default FetchRestaurantLatLong;

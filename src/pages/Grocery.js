@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Shimmer } from "../../utils/Shimmer";
-import cartData from "../../utils/cart.json"; // Import the JSON data
-import { IMAGE_URL } from "../../utils/constants";
+import { Shimmer } from "../utils/Shimmer";
+import cartData from "../utils/cart.json"; // Import the JSON data
+import { IMAGE_URL } from "../utils/constants";
 
 const Grocery = () => {
   const [groceryList, setGroceryList] = useState([]);

@@ -1,4 +1,4 @@
-import { IMAGE_URL } from './constants';
+import { IMAGE_URL } from "../utils/constants";
 
 const RestaurantCard = (props) => {
   const { resData } = props;
@@ -11,7 +11,7 @@ const RestaurantCard = (props) => {
     cloudinaryImageId,
     sla,
     isOpen,
-    aggregatedDiscountInfoV3
+    aggregatedDiscountInfoV3,
   } = resData?.info;
 
   const { deliveryTime } = sla;
@@ -26,22 +26,20 @@ const RestaurantCard = (props) => {
       {/* Status Label */}
       <div
         className={`absolute top-4 left-4 px-3 py-1 text-white font-bold text-xs rounded-full shadow-lg ${
-          isOpen ? 'bg-green-600' : 'bg-red-600'
+          isOpen ? "bg-green-600" : "bg-red-600"
         }`}
       >
-        {isOpen ? 'Opened' : 'Closed'}
+        {isOpen ? "Opened" : "Closed"}
       </div>
-      
+
       {/* Discount Info */}
       {aggregatedDiscountInfoV3 && (
-        <div
-          className="absolute top-4 right-4 px-3 py-1 text-white font-bold text-xs rounded-full bg-blue-600 shadow-lg"
-        >
+        <div className="absolute top-4 right-4 px-3 py-1 text-white font-bold text-xs rounded-full bg-blue-600 shadow-lg">
           <span>{header}</span>
           {subHeader && <span className="block text-xs">{subHeader}</span>}
         </div>
       )}
-      
+
       <div
         className="h-64 bg-cover bg-center bg-gray-200"
         style={{ backgroundImage: `url(${IMAGE_URL + cloudinaryImageId})` }}

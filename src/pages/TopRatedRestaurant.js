@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import RestaurantCard from "../../utils/RestaurantCard";
-import { Shimmer } from "../../utils/Shimmer";
-import { SWIGGY_API } from "../../utils/constants";
+import RestaurantCard from "../components/RestaurantCard";
+import { Shimmer } from "../utils/Shimmer";
+import { SWIGGY_API } from "../utils/constants";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../../hooks/useOnlineStatus";
-import OfflineComponent from "../../utils/offlineComponent";
+import useOnlineStatus from "../hooks/useOnlineStatus";
+import OfflineComponent from "../utils/offlineComponent";
 
 const TopRatedRestaurant = () => {
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);

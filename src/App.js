@@ -1,29 +1,28 @@
-// import React from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./components/Header";
-import Body from "./components/Body";
-import Footer from "./components/Footer";
+import Header from "./main/Header";
+import Body from "./main/Body";
+import Footer from "./main/Footer";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-// import About from "./components/About";
-import Contact from "./components/pages/Contact";
-import ErrorPage from "./components/pages/Error";
-import Menu from "./components/pages/Menu";
-import ScrollToTop from "./utils/ScrollToTop";
-import TopRatedRestaurant from "./components/pages/TopRatedRestaurant";
-import Search from "./components/pages/Search";
-import Profile from "./components/pages/Profile";
-import CityComponent from "./components/pages/CityComponent";
+
+import Contact from "./pages/Contact";
+import ErrorPage from "./pages/Error";
+import Menu from "./pages/Menu";
+import ScrollToTop from "./components/ScrollToTop";
+import TopRatedRestaurant from "./pages/TopRatedRestaurant";
+import Search from "./pages/Search";
+import Profile from "./pages/Profile";
+import SearchCities from "./pages/SearchCities";
 import { lazy, Suspense } from "react";
 import { Shimmer } from "./utils/Shimmer";
-import LandingPage from "./components/pages/LandingPage";
-// import Grocery from "./components/Grocery";
+import LandingPage from "./pages/LandingPage";
+
 import "./styles/tailwind.css";
-import LocationComponent from "./utils/Location";
-import 'animate.css';
+import LocationComponent from "./pages/FindMe";
+import "animate.css";
 
-
-const Grocery = lazy(() => import("./components/pages/Grocery"));
-const About = lazy(() => import("./components/pages/About"));
+const Grocery = lazy(() => import("./pages/Grocery"));
+const About = lazy(() => import("./pages/About"));
 // dynamic import is used to load the component lazily.
 // lazy is a function that takes a function as an argument and returns a promise.
 // the function passed to lazy is a dynamic import that loads the component asynchronously.
@@ -83,7 +82,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "cities",
-        element: <CityComponent />,
+        element: <SearchCities />,
       },
       {
         path: "location",
