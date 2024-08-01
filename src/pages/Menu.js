@@ -74,6 +74,7 @@ const Menu = () => {
         <CarouselCard 
           carousel={carousel} 
           handleAddonsClick={handleAddonsClick} 
+          title={title}
         />
       )}
       <div className="menu-card bg-white rounded-lg shadow-lg p-6">

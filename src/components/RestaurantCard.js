@@ -51,6 +51,7 @@ const RestaurantCard = (props) => {
           </div>
         </div>
       </div>
+
       <div className="p-6">
         {/* Rating Box */}
         <div className="flex items-center space-x-2 mb-3">

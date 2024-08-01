@@ -1,12 +1,12 @@
 // CarouselCard.js
-import React from 'react';
+import React from "react";
 
 import { IMAGE_URL } from "../../utils/constants"; // Update this URL accordingly
 
-const CarouselCard = ({ carousel, handleAddonsClick }) => {
+const CarouselCard = ({ carousel, handleAddonsClick, title }) => {
   return (
     <div className="carousel-card bg-white rounded-lg shadow-lg p-6 mb-8">
-      <h2 className="text-3xl font-bold text-gray-800 mb-4">Specials</h2>
+      <h2 className="text-3xl font-bold text-gray-800 mb-4">{title}</h2>
       <div className="carousel overflow-x-auto">
         <div className="carousel-inner flex space-x-4 pb-4">
           {carousel.map((item, index) => {
@@ -43,7 +43,7 @@ const CarouselCard = ({ carousel, handleAddonsClick }) => {
                     className="mt-2 bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600"
                     onClick={() => handleAddonsClick(addons)}
                   >
-                    Add+
+                    Add-ons
                   </button>
                 )}
               </div>

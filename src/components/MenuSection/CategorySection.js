@@ -23,7 +23,7 @@ const CategorySection = ({
                 className="text-xl font-semibold text-gray-700 cursor-pointer mb-2"
                 onClick={() => toggleCategory(sectionIndex, categoryIndex)}
               >
-                {title} ({(itemCards.length)})
+                {title} ({itemCards.length})
                 {expandedCategories[sectionIndex]?.[categoryIndex] ? (
                   <span className="text-gray-600">▲</span>
                 ) : (

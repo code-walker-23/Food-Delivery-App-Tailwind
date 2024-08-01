@@ -35,7 +35,7 @@ const ItemCards = ({ items, onAddonsClick }) => {
               {/* Image Section */}
               <div className="relative">
                 <img
-                  className="w-full h-32 object-cover rounded-t-lg"
+                  className="w-full h-40 object-cover rounded-t-lg"
                   src={IMAGE_URL + imageId}
                   alt={name}
                 />
@@ -46,10 +46,13 @@ const ItemCards = ({ items, onAddonsClick }) => {
                 >
                   {isVeg ? "Veg" : "Non-Veg"}
                 </div>
+                <button className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white text-green-600 text-lg py-2 px-6 rounded-full shadow-lg border border-green-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition ease-in-out duration-300">
+                  Add to Cart
+                </button>
                 {/* Rating Badge */}
                 {rating !== "0" && (
                   <div
-                    className={`absolute bottom-2 right-2 ${ratingColor} text-white text-xs py-1 px-2 rounded-full flex items-center space-x-1`}
+                    className={`absolute top-2 right-2 ${ratingColor} text-white text-xs py-1 px-2 rounded-full flex items-center space-x-1`}
                   >
                     <span>{rating}</span>
                     <span>✪</span>
@@ -78,12 +81,19 @@ const ItemCards = ({ items, onAddonsClick }) => {
                     ₹{(value / 100).toFixed(2)}
                   </p>
                 </div>
-                {addons?.length > 0 && (
+                {addons?.length > 0 ? (
                   <button
-                    className="bg-yellow-500 text-white text-xs py-1 px-3 rounded-lg hover:bg-yellow-600 transition"
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white text-xs py-1 px-3 rounded-lg hover:bg-yellow-600 transition"
                     onClick={() => onAddonsClick(addons)}
                   >
-                    Add+
+                    Add-ons
+                  </button>
+                ) : (
+                  <button
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-red-500 text-white text-xs py-1 px-3 rounded-lg hover:bg-red-600 transition"
+                    disabled
+                  >
+                    No Add-ons
                   </button>
                 )}
               </div>
