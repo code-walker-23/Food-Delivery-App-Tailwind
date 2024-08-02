@@ -25,7 +25,7 @@ const FindMe = () => {
   };
 
   return (
-    <div className="location-container bg-gray-50 min-h-screen flex flex-col items-center justify-center py-8 px-4">
+    <div className="location-container bg-gray-50 min-h-screen flex flex-col items-center justify-center py-2 px-4">
       <h1 className="location-heading text-4xl font-extrabold text-gray-800 mb-6">
         Discover Restaurants Near You
       </h1>

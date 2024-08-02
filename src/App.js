@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./main/Header";
 import Body from "./main/Body";
 import Footer from "./main/Footer";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import RatingFilter from "./components/RatingFilter";
 
 import Contact from "./pages/Contact";
 import ErrorPage from "./pages/Error";
@@ -13,13 +14,14 @@ import TopRatedRestaurant from "./pages/TopRatedRestaurant";
 import Search from "./pages/Search";
 import Profile from "./pages/Profile";
 import SearchCities from "./pages/SearchCities";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Shimmer } from "./utils/Shimmer";
 import LandingPage from "./pages/LandingPage";
 
 import "./styles/tailwind.css";
 import LocationComponent from "./pages/FindMe";
 import "animate.css";
+import UserContex from "./utils/UserContext";
 
 const Grocery = lazy(() => import("./pages/Grocery"));
 const About = lazy(() => import("./pages/About"));
@@ -31,13 +33,23 @@ const About = lazy(() => import("./pages/About"));
 // lazy loading or Dynamic Loading or Code Splitting or Chunking or Dynamic importing  is a technique used to improve the performance of web applications by loading code only when it is needed.
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState("");
+  useEffect(() => {
+    const data = {
+      name: "Vinay Chhabra",
+    };
+    setUserName(data.name);
+  }, []);
+
   return (
-    <div className="app">
-      <ScrollToTop />
-      <Header />
-      <Outlet />
-      <Footer />
-    </div>
+    <UserContex.Provider value={{ loggedIn: userName }}>
+      <div className="app">
+        <ScrollToTop />
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
+    </UserContex.Provider>
   );
 };
 
@@ -48,7 +60,7 @@ const appRouter = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/main",
+    path: "main",
     element: <AppLayout />,
     children: [
       { path: "", element: <Body /> }, // Default child route
@@ -95,6 +107,10 @@ const appRouter = createBrowserRouter([
             <Grocery />
           </Suspense>
         ),
+      },
+      {
+        path: "RatingFilter",
+        element: <RatingFilter />,
       },
     ],
     errorElement: <ErrorPage />,

@@ -7,6 +7,7 @@ const RestaurantCard = (props) => {
     cuisines,
     avgRating,
     locality,
+    areaName,
     costForTwo,
     cloudinaryImageId,
     sla,
@@ -22,14 +23,10 @@ const RestaurantCard = (props) => {
   const starEmoji = "✪"; // Star emoji for rating
 
   return (
-    <div className="relative max-w-sm mx-auto bg-white rounded-3xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
-      {/* Status Label */}
-      <div
-        className={`absolute top-4 left-4 px-3 py-1 text-white font-bold text-xs rounded-full shadow-lg ${
-          isOpen ? "bg-green-600" : "bg-red-600"
-        }`}
-      >
-        {isOpen ? "Opened" : "Closed"}
+    <div className="relative max-w-xs mx-auto bg-white rounded-2xl shadow-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl">
+      {/* Delivery Time Banner */}
+      <div className="absolute top-4 left-4 px-2 py-1 text-white font-bold text-xs rounded-lg bg-orange-600 shadow-md">
+        <span>Delivery in {deliveryTime} mins</span>
       </div>
 
       {/* Discount Info */}
@@ -41,23 +38,30 @@ const RestaurantCard = (props) => {
       )}
 
       <div
-        className="h-64 bg-cover bg-center bg-gray-200"
+        className="h-48 bg-cover bg-center bg-gray-200 rounded-t-2xl"
         style={{ backgroundImage: `url(${IMAGE_URL + cloudinaryImageId})` }}
       >
         <div className="flex items-center justify-end h-full p-4">
-          <div className="bg-gradient-to-t from-black to-transparent w-full h-full absolute inset-0"></div>
-          <div className="relative z-10 text-white text-xl font-semibold p-4 bg-black bg-opacity-50 rounded-lg">
+          <div className="bg-gradient-to-t from-black to-transparent w-full h-full absolute inset-0 rounded-t-2xl"></div>
+          <div className="relative z-10 text-white text-lg font-semibold p-2 bg-black bg-opacity-60 rounded-lg">
             {name}
           </div>
         </div>
       </div>
 
-      <div className="p-6">
-        {/* Rating Box */}
-        <div className="flex items-center space-x-2 mb-3">
-          <div className="flex items-center bg-green-500 text-white py-1 px-3 rounded-lg shadow-md">
-            <span className="text-xl">{starEmoji}</span>
-            <span className="ml-2 text-lg font-semibold">{avgRating}</span>
+      <div className="p-4">
+        {/* Rating Box and Status Label */}
+        <div className="flex items-center space-x-2 mb-2">
+          <div className="flex items-center bg-green-500 text-white py-1 px-2 rounded-full shadow-sm">
+            <span className="text-lg">{starEmoji}</span>
+            <span className="ml-1 text-sm font-semibold">{avgRating}</span>
+          </div>
+          <div
+            className={`px-3 py-1 text-white font-bold text-xs rounded-full shadow-lg ${
+              isOpen ? "bg-green-600" : "bg-red-600"
+            }`}
+          >
+            {isOpen ? "Opened" : "Closed"}
           </div>
         </div>
         <p
@@ -66,11 +70,12 @@ const RestaurantCard = (props) => {
         >
           {cuisines.join(", ")}
         </p>
-        <p className="text-gray-600 text-sm mb-2">{locality}</p>
-        <p className="text-gray-600 text-sm mb-2">
-          Delivery in {deliveryTime} mins
+        <div className="relative z-10 text-white text-lg font-semibold p-2 bg-black bg-opacity-60 rounded-lg">
+          {areaName}
+        </div>
+        <p className="text-gray-800 font-semibold text-sm mt-2">
+          {costForTwo}
         </p>
-        <p className="text-gray-800 font-semibold">{costForTwo}</p>
       </div>
     </div>
   );
