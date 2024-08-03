@@ -5,7 +5,6 @@ import Body from "./main/Body";
 import Footer from "./main/Footer";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RatingFilter from "./components/RatingFilter";
-
 import Contact from "./pages/Contact";
 import ErrorPage from "./pages/Error";
 import Menu from "./pages/Menu";
@@ -17,7 +16,6 @@ import SearchCities from "./pages/SearchCities";
 import { lazy, Suspense, useEffect } from "react";
 import { Shimmer } from "./utils/Shimmer";
 import LandingPage from "./pages/LandingPage";
-
 import "./styles/tailwind.css";
 import LocationComponent from "./pages/FindMe";
 import "animate.css";
@@ -25,6 +23,7 @@ import UserContex from "./utils/UserContext";
 
 const Grocery = lazy(() => import("./pages/Grocery"));
 const About = lazy(() => import("./pages/About"));
+
 // dynamic import is used to load the component lazily.
 // lazy is a function that takes a function as an argument and returns a promise.
 // the function passed to lazy is a dynamic import that loads the component asynchronously.
@@ -42,6 +41,7 @@ const AppLayout = () => {
   }, []);
 
   return (
+    // Vinay Chhabra
     <UserContex.Provider value={{ loggedIn: userName }}>
       <div className="app">
         <ScrollToTop />
@@ -52,7 +52,7 @@ const AppLayout = () => {
     </UserContex.Provider>
   );
 };
-
+// whatever we wrapped inside the UserContext.Provider, will be able to access the value that we passed to the provider.
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -124,7 +124,26 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(<AppLayout />);
 root.render(<RouterProvider router={appRouter} />);
 
+
+
 /* 
+
+ <UserContex.Provider value={{ loggedIn: userName }}>
+      <div className="app">
+        <ScrollToTop />
+        // kaku -> we can use nested provider to pass the value to the nested components.
+        <UserContex.Provider value={{ loggedInUser: "kaku" }}>
+          <Header />
+        </UserContex.Provider>
+        <Outlet />
+        <Footer />
+      </div>
+    </UserContex.Provider>
+
+
+
+
+
 
 
 In this application, you are setting up routing using React Router with a structure that involves nested routes. Here's a breakdown of how routing is configured and how it works in this application:

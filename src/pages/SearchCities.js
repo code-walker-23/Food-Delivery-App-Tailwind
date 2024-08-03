@@ -8,7 +8,7 @@ import Search from "./Search"; // Make sure this is correctly imported
 const SearchCities = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const cities = CitiesList();
 

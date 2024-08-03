@@ -1,6 +1,7 @@
 import { IMAGE_URL } from "../utils/constants";
 
 const RestaurantCard = (props) => {
+  console.log(props);
   const { resData } = props;
   const {
     name,
@@ -17,6 +18,7 @@ const RestaurantCard = (props) => {
 
   const { deliveryTime } = sla;
   const { header, subHeader } = aggregatedDiscountInfoV3 || {};
+  console.log(costForTwo);
 
   // Convert avgRating to a number and round it to the nearest whole number
   const rating = Math.round(parseFloat(avgRating));
@@ -70,12 +72,12 @@ const RestaurantCard = (props) => {
         >
           {cuisines.join(", ")}
         </p>
-        <div className="relative z-10 text-white text-lg font-semibold p-2 bg-black bg-opacity-60 rounded-lg">
-          {areaName}
+        <div className="text-center relative z-10 text-white text-lg font-semibold p-2 bg-black bg-opacity-60 rounded-lg">
+          {areaName} : ({costForTwo})
         </div>
-        <p className="text-gray-800 font-semibold text-sm mt-2">
+        {/* <p className="text-gray-800 font-semibold text-sm mt-2">
           {costForTwo}
-        </p>
+        </p> */}
       </div>
     </div>
   );
