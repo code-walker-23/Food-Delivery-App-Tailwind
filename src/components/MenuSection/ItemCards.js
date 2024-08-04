@@ -1,8 +1,16 @@
-// ItemCards.js
 import React from "react";
 import { IMAGE_URL } from "../../utils/constants";
+import UserContex from "../../utils/UserContext";
+import { useContext } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../utils/cartSlice";
 
 const ItemCards = ({ items, onAddonsClick }) => {
+  const dispatch = useDispatch();
+  const handleAddItems = (item) => {
+    dispatch(addToCart(item));
+  };
+  const { handleCart } = useContext(UserContex);
   return (
     <ul className="menu-items grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {items.map((item, itemIndex) => {
@@ -46,7 +54,10 @@ const ItemCards = ({ items, onAddonsClick }) => {
                 >
                   {isVeg ? "Veg" : "Non-Veg"}
                 </div>
-                <button className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white text-green-600 text-lg py-2 px-6 rounded-full shadow-lg border border-green-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition ease-in-out duration-300">
+                <button
+                  onClick={()=>handleAddItems(item)}
+                  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white text-green-600 text-lg py-2 px-6 rounded-full shadow-lg border border-green-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500 transition ease-in-out duration-300"
+                >
                   Add to Cart
                 </button>
                 {/* Rating Badge */}
@@ -106,3 +117,52 @@ const ItemCards = ({ items, onAddonsClick }) => {
 };
 
 export default ItemCards;
+
+/*  
+
+  onClick={handleAddItems} : It will call the handleAddItems function when the button is clicked.
+  onClick={()=>handleAddItems(item)} : It will call the handleAddItems function with the item as an argument when the button is clicked.
+  onClick={handleAddItems(item)} : It will call the handleAddItems function with the item as an argument when the button is rendered.
+
+
+
+
+  Sure, let's break down the differences between these three ways of handling the `onClick` event in React:
+
+1. **`onClick={handleAddItems}`**
+
+   This approach directly assigns the `handleAddItems` function to the `onClick` event. When the button is clicked, `handleAddItems` will be called with no arguments. This is suitable when you don't need to pass any specific data or arguments to the function.
+
+   ```jsx
+   <button onClick={handleAddItems}>Add Item</button>
+   ```
+
+2. **`onClick={() => handleAddItems(item)}`**
+
+   Here, an arrow function is used to create a new function that, when called, will invoke `handleAddItems` with `item` as an argument. This approach allows you to pass parameters to `handleAddItems` when the button is clicked.
+
+   ```jsx
+   <button onClick={() => handleAddItems(item)}>Add Item</button>
+   ```
+
+   This is useful if `handleAddItems` needs specific data from the context in which it’s called, like the `item` in this example.
+
+3. **`onClick={handleAddItems(item)}`**
+
+   This syntax is incorrect for handling event handlers in React. It will immediately call `handleAddItems` with `item` as soon as the component renders, not when the button is clicked. It’s like trying to assign the result of the function call (which is likely `undefined` unless `handleAddItems` explicitly returns something) to `onClick`, rather than passing the function itself.
+
+   ```jsx
+   <button onClick={handleAddItems(item)}>Add Item</button>
+   ```
+
+   This will lead to the function executing immediately during rendering, rather than on a button click.
+
+### Summary
+
+- **`onClick={handleAddItems}`**: Calls `handleAddItems` with no arguments on button click.
+- **`onClick={() => handleAddItems(item)}`**: Calls `handleAddItems` with `item` as an argument on button click.
+- **`onClick={handleAddItems(item)}`**: Incorrect. Executes `handleAddItems` immediately during rendering, not on button click.
+
+In general, use the first approach for functions that don’t need parameters, and the second approach when you need to pass arguments to the function on a click event. Avoid the third approach unless you want to execute the function immediately for some reason (which is not typical for event handling).
+
+*/

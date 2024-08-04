@@ -4,13 +4,13 @@ import { Shimmer } from "../utils/Shimmer";
 import useRestaurantMenu from "../hooks/useRestaurantMenu";
 import OfflineComponent from "../utils/offlineComponent";
 import useOnlineStatus from "../hooks/useOnlineStatus";
-import ItemCards from "../components/MenuSection/ItemCards";
 import RestaurantInformation from "../components/MenuSection/RestaurantInformation";
 import MenuSection from "../components/MenuSection/MenuSection";
 import Offer from "../components/MenuSection/Offer";
 import CarouselCard from "../components/MenuSection/Carousel"; // Import the CarouselCard component
 import AddonsModal from "../components/MenuSection/AddonsModal"; // Import the AddonsModal component
 import { useParams } from "react-router-dom";
+
 
 const Menu = () => {
   const [selectedAddons, setSelectedAddons] = useState(null);

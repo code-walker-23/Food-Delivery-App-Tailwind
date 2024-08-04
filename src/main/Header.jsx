@@ -2,13 +2,17 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../hooks/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
-  const loggedInUser = useContext(UserContext);
+  const {loggedInUser,cart} = useContext(UserContext);
   const onlineStatus = useOnlineStatus();
   const statusString = onlineStatus ? "Online" : "Offline";
   const statusTextColor = onlineStatus ? "text-green-500" : "text-red-500";
+  // subscribing to the store
+  const cartItems = useSelector((store) => store.cart.items);
+  console.log("Cart Items",cartItems);
 
   return (
     <header className="bg-gray-900 text-white shadow-lg py-4 px-6">
@@ -23,11 +27,7 @@ const Header = () => {
           </Link>
           <div className="flex items-center space-x-4">
             <span className={`text-sm ${statusTextColor}`}>{statusString}</span>
-            {loggedInUser && (
-              <span className="text-sm text-gray-300">
-                Welcome, {loggedInUser.name}
-              </span>
-            )}
+            
           </div>
         </div>
 
@@ -63,7 +63,7 @@ const Header = () => {
               to="/main/cart"
               className="text-lg font-semibold text-gray-300 hover:text-white transition duration-300"
             >
-              Cart
+              Cart-({cartItems.length} items)
             </Link>
             <Link
               to="/main/profile"
@@ -80,6 +80,7 @@ const Header = () => {
           >
             {btnName}
           </button>
+          <Link to="#">{loggedInUser}</Link>
         </div>
       </div>
     </header>

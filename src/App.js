@@ -20,6 +20,11 @@ import "./styles/tailwind.css";
 import LocationComponent from "./pages/FindMe";
 import "animate.css";
 import UserContex from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./pages/Cart";
+// react-redux is a library that provides bindings for React to the Redux state management library.it acts as a bridge between react and redux.
+//provider is a component that makes the Redux store available to any nested components that have been wrapped in the connect() function.
 
 const Grocery = lazy(() => import("./pages/Grocery"));
 const About = lazy(() => import("./pages/About"));
@@ -32,7 +37,8 @@ const About = lazy(() => import("./pages/About"));
 // lazy loading or Dynamic Loading or Code Splitting or Chunking or Dynamic importing  is a technique used to improve the performance of web applications by loading code only when it is needed.
 
 const AppLayout = () => {
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState("Vinay Chhabra");
+  const[cart,setCart] = useState(0);
   useEffect(() => {
     const data = {
       name: "Vinay Chhabra",
@@ -40,9 +46,14 @@ const AppLayout = () => {
     setUserName(data.name);
   }, []);
 
+  console.log(userName);
+  const handleCart = ()=>{
+    setCart(cart+1);
+  }
   return (
     // Vinay Chhabra
-    <UserContex.Provider value={{ loggedIn: userName }}>
+    <Provider store={appStore}>
+    <UserContex.Provider value={{ loggedInUser: userName ,setUserName,cart,handleCart}}>
       <div className="app">
         <ScrollToTop />
         <Header />
@@ -50,6 +61,7 @@ const AppLayout = () => {
         <Footer />
       </div>
     </UserContex.Provider>
+    </Provider>
   );
 };
 // whatever we wrapped inside the UserContext.Provider, will be able to access the value that we passed to the provider.
@@ -111,7 +123,11 @@ const appRouter = createBrowserRouter([
       {
         path: "RatingFilter",
         element: <RatingFilter />,
-      },
+      },,
+      {
+        path: "cart",
+        element: <Cart />,
+      }
     ],
     errorElement: <ErrorPage />,
   },

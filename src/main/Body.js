@@ -4,7 +4,7 @@ import { Shimmer } from "../utils/Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../hooks/useOnlineStatus";
 import OfflineComponent from "../utils/offlineComponent";
-import UserContex from "../utils/UserContext";
+
 import FilterButton from "../components/Filter/FilterButton";
 import {
   SWIGGY_API,
@@ -24,8 +24,6 @@ const Body = () => {
   const [selectedFilter, setSelectedFilter] = useState("");
   let filteredRestaurant = listOfRestaurants;
 
-  const loggedInUser = useContext(UserContex);
-  console.log("Body : ", loggedInUser);
 
   useEffect(() => {
     fetchData();
@@ -211,6 +209,28 @@ export default Body;
 
 /* 
 
+Redux : Redux is a state management library for JavaScript applications, primarily used with React. It helps manage the state of an application in a predictable and centralized way. Redux provides a global store that holds the state of the entire application, and components can access and update the state using actions and reducers.
+
+Redux works in data layer.
+
+Redux Advantages : Redux provides several advantages for managing state in React applications:
+
+1. Predictable state management: Redux provides a predictable way to manage the state of an application. The state of the application is stored in a single global store, and components can access and update the state using actions and reducers.
+
+2. Centralized state management: Redux provides a centralized way to manage the state of an application. This can help simplify state management and make it easier to share data between components.
+
+3. Time-travel debugging: Redux provides time-travel debugging, which allows developers to replay actions and see how the state of the application changes over time. This can help debug issues and understand how the state of the application evolves.
+
+4. Middleware support: Redux provides middleware support, which allows developers to add custom logic to the data flow in the application. Middleware can be used for logging, error handling, and other tasks.
+
+5. Devtools support: Redux provides devtools that allow developers to inspect the state of the application, track actions, and debug issues. Devtools can help improve the development experience and make it easier to understand the data flow in the application.
+
+6. Scalability: Redux is scalable and can be used in small and large applications. It provides a consistent way to manage state in React applications, regardless of the size of the application.
+
+7. Community support: Redux has a large community of developers and resources available online. This can help developers learn Redux, find solutions to common issues, and get support from the community.
+
+React Query : React Query is a library for managing server state in React applications. It provides hooks and utilities for fetching, caching, and updating data from APIs. React Query simplifies data fetching and caching, and provides a consistent way to manage server state in React applications.
+
 
 In react there is one way data flow, which means that the data flows from parent component to child component. If you want to pass data from child component to parent component, you can use props and callbacks. In this case, you can pass a function as a prop to the child component, and the child component can call this function to pass data to the parent component.
 
@@ -277,9 +297,90 @@ Use Cases of Context Api :
 
 
 
+Redux vs Context API :
+
+1. State management: Redux is a state management library that provides a global store to manage the state of an application. The Context API is a feature in React that allows components to share data without having to pass props manually. Redux is more suitable for managing complex state and data flow in large applications, while the Context API is more suitable for managing simple state and data flow in smaller applications.
+
+2. Predictability: Redux provides a predictable way to manage the state of an application, with actions and reducers to update the state. The Context API provides a way to pass data through the component tree without having to pass props manually. Redux is more predictable and centralized, while the Context API is more flexible and decentralized.
+
+3. Performance: Redux can introduce performance overhead, especially when managing large state and data flow. The Context API can also introduce performance overhead, especially when using multiple contexts and providers. Both Redux and the Context API can impact the performance of an application, and it is important to carefully manage the state and data flow to avoid performance issues.
+
+4. Learning curve: Redux has a steeper learning curve compared to the Context API. Redux requires developers to understand concepts such as actions, reducers, and the store, while the Context API is simpler and easier to use. The Context API is more beginner-friendly and can be used to manage simple state and data flow in React applications.
+
+5. Use cases: Redux is more suitable for managing complex state and data flow in large applications, while the Context API is more suitable for managing simple state and data flow in smaller applications. Redux is commonly used in production applications with complex state management requirements, while the Context API is commonly used in smaller applications with simple state management requirements.
+
+6. Community support: Redux has a large community of developers and resources available online. The Context API is a feature in React and is widely used in the React community. Both Redux and the Context API have good community support and resources available online to help developers learn and use the libraries.
+
+7. Scalability: Redux is scalable and can be used in small and large applications. It provides a consistent way to manage state in React applications, regardless of the size of the application. The Context API is also scalable and can be used in small and large applications, but is more suitable for managing simple state and data flow in smaller applications.
+
+8. Performance optimizations: Redux provides performance optimizations, such as memoization and lazy loading, to improve performance when managing state and data flow. The Context API also provides performance optimizations, such as memoization and lazy loading, to improve performance when passing data through the component tree. Both Redux and the Context API provide performance optimizations to improve the performance of React applications.
+
+9. Middleware support: Redux provides middleware support, which allows developers to add custom logic to the data flow in the application. Middleware can be used for logging, error handling, and other tasks. The Context API does not provide middleware support, but can be combined with other libraries, such as Redux or Apollo Client, to add middleware support to the application.
+
+10. Devtools support: Redux provides devtools that allow developers to inspect the state of the application, track actions, and debug issues. Devtools can help improve the development experience and make it easier to understand the data flow in the application. The Context API does not provide devtools support, but can be combined with other libraries, such as Redux DevTools, to add devtools support to the application.
+
+
+zustand : Zustand is a small, fast and scaleable bearbones state-management solution using modern React hooks API to help you build your next React application. It is a simple and flexible state management library for React applications. Zustand provides a way to manage state in React components using hooks, and allows you to create global state that can be shared between components.
+
+Zustand Advantages : Zustand provides several advantages for managing state in React applications:
+
+1. Simple and flexible: Zustand is simple and flexible, and provides a way to manage state in React components using hooks. It allows you to create global state that can be shared between components, and provides a consistent way to manage state in React applications.
+
+2. Lightweight and fast: Zustand is lightweight and fast, and has a small bundle size. It is optimized for performance and provides a fast and efficient way to manage state in React applications.
+
+3. Scalable and composable: Zustand is scalable and composable, and allows you to create complex state structures and share state between components. It provides a way to compose state and update state in a predictable and centralized way.
+
+4. Hooks API: Zustand uses modern React hooks API to manage state in React components. It provides hooks for creating and updating state, and allows you to use hooks to access and update the state in components.
+
+we will not use old way of  writing redux code, we will use modern way of writing redux code using redux toolkit.
+
+Redux Toolkit : Redux Toolkit is the official, recommended way to write Redux logic. It is a set of tools and best practices that help simplify the process of writing Redux code. Redux Toolkit provides utilities for creating actions, reducers, and the store, and helps manage the state of an application in a predictable and centralized way.
+
+Redux Toolkit Advantages : Redux Toolkit provides several advantages for writing Redux logic in React applications:
+
+1. Simplified syntax: Redux Toolkit simplifies the syntax for creating actions, reducers, and the store. It provides utilities for creating actions and reducers, and helps manage the state of an application in a predictable and centralized way.
+
+2. Best practices: Redux Toolkit follows best practices for writing Redux code. It provides a set of tools and guidelines for writing Redux logic, and helps developers write clean and maintainable code.
+
+3. Performance optimizations: Redux Toolkit provides performance optimizations, such as memoization and lazy loading, to improve the performance of Redux applications. It helps reduce unnecessary re-renders and improve the overall performance of the application.
+
+4. Devtools support: Redux Toolkit provides devtools that allow developers to inspect the state of the application, track actions, and debug issues. Devtools can help improve the development experience and make it easier to understand the data flow in the application.
+
+5. Middleware support: Redux Toolkit provides middleware support, which allows developers to add custom logic to the data flow in the application. Middleware can be used for logging, error handling, and other tasks.
+
+old redux vs redux toolkit : 
+1. Boilerplate code: In old Redux, writing actions, reducers, and the store required writing a lot of boilerplate code. Redux Toolkit simplifies the process of writing Redux code and reduces the amount of boilerplate code required.
+
+old way of writing redux logic is also know as vanilla redux and it is not recommended to use it in modern react applications and it is not efficient way of writing redux code and redux toolkit is the recommended way of writing redux code in modern react application and it is efficient way of writing redux code and it provides several advantages for writing redux logic in react applications.
+
+2. Best practices: Redux Toolkit follows best practices for writing Redux code, such as using immutable updates and avoiding side effects in reducers. It provides a set of tools and guidelines for writing clean and maintainable Redux code.
+
+3. Performance optimizations: Redux Toolkit provides performance optimizations, such as memoization and lazy loading, to improve the performance of Redux applications. It helps reduce unnecessary re-renders and improve the overall performance of the application.
+
+Advantgaes of Redux Toolkit over old way of writing redux code(vanilla redux) with disadvantages of old way of writing redux code(vanilla redux) :
+
+1. Simplified syntax: Redux Toolkit simplifies the syntax for creating actions, reducers, and the store. It provides utilities for creating actions and reducers, and helps manage the state of an application in a predictable and centralized way. In old Redux, writing actions, reducers, and the store required writing a lot of boilerplate code.
+
+2. Best practices: Redux Toolkit follows best practices for writing Redux code. It provides a set of tools and guidelines for writing clean and maintainable Redux code. In old Redux, developers had to follow best practices manually, which could lead to errors and bugs.
+
+3. Performance optimizations: Redux Toolkit provides performance optimizations, such as memoization and lazy loading, to improve the performance of Redux applications. It helps reduce unnecessary re-renders and improve the overall performance of the application. In old Redux, developers had to optimize the performance of the application manually, which could be time-consuming and error-prone.
+
+4. Devtools support: Redux Toolkit provides devtools that allow developers to inspect the state of the application, track actions, and debug issues. Devtools can help improve the development experience and make it easier to understand the data flow in the application. In old Redux, developers had to use third-party tools for debugging and inspecting the state of the application.
+
+5. Middleware support: Redux Toolkit provides middleware support, which allows developers to add custom logic to the data flow in the application. Middleware can be used for logging, error handling, and other tasks. In old Redux, developers had to write custom middleware for handling side effects, which could be complex and error-prone.
 
 
 
+
+The older way of writing Redux, before the introduction of Redux Toolkit, is often referred to as the **"classic Redux"** approach or **"traditional Redux"** approach. This method involves more manual setup and boilerplate code. 
+
+In classic Redux, you manually handle:
+- **Action Types**: Constants or strings representing different actions.
+- **Action Creators**: Functions that create action objects.
+- **Reducers**: Functions that handle state changes based on actions.
+- **Store Creation**: Using `createStore` to set up the store with reducers.
+
+Classic Redux can involve a fair amount of boilerplate, including defining action types, creating action creators, and writing reducers manually. Redux Toolkit was introduced to simplify and reduce this boilerplate by providing utilities that streamline common Redux tasks.
 
 
 
