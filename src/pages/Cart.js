@@ -34,7 +34,7 @@ const Cart = () => {
       </div>
       <footer className="mt-10 text-center">
         <p className="text-gray-600 text-sm">
-          Need help? <a href="/contact" className="text-blue-600 hover:underline">Contact us</a>
+          Need help? <a href="/main/contact" className="text-blue-600 hover:underline">Contact us</a>
         </p>
       </footer>
     </div>

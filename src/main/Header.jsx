@@ -80,7 +80,7 @@ const Header = () => {
           >
             {btnName}
           </button>
-          <Link to="#">{loggedInUser}</Link>
+          {/* <Link to="#">{loggedInUser}</Link> */}
         </div>
       </div>
     </header>
