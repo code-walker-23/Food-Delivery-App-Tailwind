@@ -1,6 +1,6 @@
 # Food Delivery App
 
-This is a React-based food delivery application that displays restaurant information, menus, and allows users to search for restaurants. The app is deployed on Vercel and can be accessed [here](https://food-delivery-app-pi-sable.vercel.app/).
+This is a React-based food delivery application that displays restaurant information, menus, and allows users to search for restaurants. The app is deployed on Vercel and can be accessed [here](https://food-delivery-app-tailwind-vinay.vercel.app/).
 
 ## Features
 
@@ -36,7 +36,7 @@ To run the project locally, follow these steps:
 
 ## Running the App
 
-You can also access the deployed app [here](https://food-delivery-app-pi-sable.vercel.app/). Please ensure you have the CORS Unblocker extension installed and enabled in your browser for the app to function correctly. This is necessary because the app fetches live data from Swiggy's API, which has CORS restrictions.
+You can also access the deployed app [here](https://food-delivery-app-tailwind-vinay.vercel.app/). Please ensure you have the CORS Unblocker extension installed and enabled in your browser for the app to function correctly. This is necessary because the app fetches live data from Swiggy's API, which has CORS restrictions.
 
 ## Project Structure
 
