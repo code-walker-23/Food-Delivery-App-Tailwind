@@ -4,7 +4,11 @@ import ItemList from "../components/ItemList"; // Adjust the path as necessary
 import { clearCart } from "../utils/cartSlice";
 
 const Cart = () => {
-  const cartItems = useSelector((store) => store.cart.items || []);
+  // if you subscribe to the wrong portion of the store, this will be very huge performance loss
+  const cartItems = useSelector((store) => {
+    console.log("store", store);
+    return store.cart.items || [];
+  });
   const dispatch = useDispatch();
 
   const handleClearCart = () => {
@@ -14,9 +18,12 @@ const Cart = () => {
   return (
     <div className="cart-container min-h-screen bg-gray-200 py-10 px-6 sm:px-8 lg:px-12">
       <header className="mb-8 text-center">
-        <h2 className="text-4xl font-extrabold text-gray-800 mb-3">Your Cart</h2>
+        <h2 className="text-4xl font-extrabold text-gray-800 mb-3">
+          Your Cart
+        </h2>
         <p className="text-lg text-gray-600 mb-6">
-          Review your selected items and proceed to checkout. Don't forget to review your selections before finalizing.
+          Review your selected items and proceed to checkout. Don't forget to
+          review your selections before finalizing.
         </p>
         <button
           onClick={handleClearCart}
@@ -29,12 +36,17 @@ const Cart = () => {
         {cartItems.length > 0 ? (
           <ItemList items={cartItems} />
         ) : (
-          <p className="text-center text-gray-700 text-xl font-medium">Your cart is empty.</p>
+          <p className="text-center text-gray-700 text-xl font-medium">
+            Your cart is empty.
+          </p>
         )}
       </div>
       <footer className="mt-10 text-center">
         <p className="text-gray-600 text-sm">
-          Need help? <a href="/main/contact" className="text-blue-600 hover:underline">Contact us</a>
+          Need help?{" "}
+          <a href="/main/contact" className="text-blue-600 hover:underline">
+            Contact us
+          </a>
         </p>
       </footer>
     </div>
@@ -42,18 +54,6 @@ const Cart = () => {
 };
 
 export default Cart;
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
 working
@@ -89,3 +89,22 @@ const Cart = () => {
 
 export default Cart;
  */
+
+
+
+
+/* 
+
+if you subscribe to the wrong portion of the store, this will be very huge performance loss
+1.Method(Tell interviewer to the best method)
+const store = useSelector((store) => store); // load whole store in the component
+const cartItems = store.cart.items; 
+
+2.Method
+const cartItems = useSelector((store) => store.cart.items || []); // load only cart items
+
+In the first method you are loading the whole store in the component, which is not a good practice.
+Beacuse if any potion of the store gets updated, the whole store will be loaded again in the component.
+That;s why we are useSelector to load only the required portion of the store.
+
+*/

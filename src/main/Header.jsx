@@ -6,13 +6,13 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
-  const {loggedInUser,cart} = useContext(UserContext);
+  const { loggedInUser, cart } = useContext(UserContext);
   const onlineStatus = useOnlineStatus();
   const statusString = onlineStatus ? "Online" : "Offline";
   const statusTextColor = onlineStatus ? "text-green-500" : "text-red-500";
   // subscribing to the store
   const cartItems = useSelector((store) => store.cart.items);
-  console.log("Cart Items",cartItems);
+  console.log("Cart Items", cartItems);
 
   return (
     <header className="bg-gray-900 text-white shadow-lg py-4 px-6">
@@ -26,8 +26,10 @@ const Header = () => {
             Suman Food & Beverages
           </Link>
           <div className="flex items-center space-x-4">
-            <span className={`text-sm ${statusTextColor}`}>{statusString}</span>
-            
+            <span className={`text-sm ${statusTextColor}`}>
+              {statusString},
+            </span>
+            <span className="text-sm text-gray-300">Welcome</span>
           </div>
         </div>
 
@@ -88,7 +90,6 @@ const Header = () => {
 };
 
 export default Header;
-
 
 // import React, { useEffect, useState, useContext } from "react";
 // import { Link } from "react-router-dom";
