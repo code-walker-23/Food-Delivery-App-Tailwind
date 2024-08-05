@@ -34,6 +34,7 @@ const Search = ({ listOfRestaurants }) => {
               key={restaurant.info.id}
               to={`/main/restaurants/${restaurant.info.id}`}
               className="block transform transition-transform hover:scale-105"
+              target="_blank"
             >
               <RestaurantCard resData={restaurant} />
             </Link>

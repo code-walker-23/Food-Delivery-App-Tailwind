@@ -4,6 +4,8 @@ import { Shimmer } from "../utils/Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../hooks/useOnlineStatus";
 import OfflineComponent from "../utils/offlineComponent";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import FilterButton from "../components/Filter/FilterButton";
 import {
@@ -16,14 +18,14 @@ import {
 } from "../utils/constants";
 
 const Body = () => {
+  const { city } = useParams();
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedCityAPI, setSelectedCityAPI] = useState(SWIGGY_API_AGRA);
-  const [selectedCity, setSelectedCity] = useState("Agra");
+  const [selectedCity, setSelectedCity] = useState(city ||"Agra");
   const [searchText, setSearchText] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("");
   let filteredRestaurant = listOfRestaurants;
-
 
   useEffect(() => {
     fetchData();
@@ -179,6 +181,7 @@ const Body = () => {
                 <Link
                   key={restaurant.info.id}
                   to={`/main/restaurants/${restaurant.info.id}`}
+                  target="_blank"
                 >
                   <RestaurantCard resData={restaurant} />
                 </Link>
@@ -205,7 +208,6 @@ const ButtonFilter = ({ onClick, label }) => (
 );
 
 export default Body;
-
 
 /* 
 

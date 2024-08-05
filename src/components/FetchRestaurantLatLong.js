@@ -51,6 +51,7 @@ const FetchRestaurantLatLong = ({ latitude, longitude }) => {
                 key={restaurant.info.id}
                 to={`/main/restaurants/${restaurant.info.id}`}
                 className="block"
+                target="_blank"
               >
                 <RestaurantCard resData={restaurant} />
               </Link>

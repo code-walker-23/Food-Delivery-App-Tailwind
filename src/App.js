@@ -127,6 +127,12 @@ const appRouter = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },{
+        path : "restaurant/:city",
+        element : <Body/>
+      },{
+        path : "city/:cityName",
+        element : <Body/>
       }
     ],
     errorElement: <ErrorPage />,
