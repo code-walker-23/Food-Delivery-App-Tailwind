@@ -1,4 +1,3 @@
-// CategorySection.js
 import React from "react";
 import ItemCards from "./ItemCards";
 

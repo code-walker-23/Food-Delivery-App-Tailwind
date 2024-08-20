@@ -1,4 +1,3 @@
-// MenuSection.js
 import React from "react";
 import ItemCards from "./ItemCards";
 import CategorySection from "./CategorySection";

@@ -1,4 +1,3 @@
-// Offer.js
 import React from "react";
 
 const Offer = ({ offers }) => {

@@ -3,6 +3,9 @@ import { Component } from "react";
 class UserClass extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      name: "John Doe",
+    };
   }
 
   render() {

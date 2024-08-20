@@ -5,7 +5,7 @@
 
 
 
-/* Shimmer */
+
 @keyframes shimmer {
   0% {
     background-position: -1000px 0;
@@ -16,7 +16,7 @@
 }
 
 .shimmer-wrapper {
-  margin-top: 4rem; /* Add margin-top to ensure it doesn't overlap the header */
+  margin-top: 4rem; 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1rem;
@@ -69,9 +69,6 @@
 }
 
 
-
-
-/* restaurant card */
 
 
 

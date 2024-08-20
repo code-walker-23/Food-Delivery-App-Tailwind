@@ -1,4 +1,3 @@
-// AddonsModal.js
 import React from 'react';
 
 const AddonsModal = ({ selectedAddons, handleCloseAddons }) => {

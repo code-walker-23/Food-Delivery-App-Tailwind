@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Shimmer } from "../utils/Shimmer"; // Adjust the path if necessary
-import RestaurantCard from "./RestaurantCard"; // Adjust the path if necessary
+import { Shimmer } from "../utils/Shimmer";
+import RestaurantCard from "./RestaurantCard";
 
 const FetchRestaurantLatLong = ({ latitude, longitude }) => {
   const [restaurants, setRestaurants] = useState([]);
@@ -27,7 +27,7 @@ const FetchRestaurantLatLong = ({ latitude, longitude }) => {
     } catch (error) {
       console.error("Failed to fetch restaurants:", error);
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false); 
     }
   };
 

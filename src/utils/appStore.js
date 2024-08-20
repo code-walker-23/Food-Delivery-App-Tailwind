@@ -8,11 +8,3 @@ const appStore = configureStore({
 console.log("AppStore",appStore);
 export default appStore;
 
-/* 
-
-reducer is an object that contains all the reducers that we have in our application.
-reducer is containing small reducers that we have in our application.
-for eg. cartReducer is a small reducer that we have in our application. 
-
-
-*/
