@@ -15,7 +15,6 @@ const Grocery = () => {
   const fetchData = () => {
     try {
       const json = cartData;
-      console.log("Fetched JSON:", json);
 
       if (!json || !json.data || !json.data.widgets[1]?.data) {
         throw new Error("No data available");
@@ -32,11 +31,14 @@ const Grocery = () => {
   };
 
   if (loading) return <Shimmer />;
-  if (error) return <div className="text-red-600 text-lg p-4">Error: {error}</div>;
+  if (error)
+    return <div className="text-red-600 text-lg p-4">Error: {error}</div>;
 
   return (
     <div className="grocery-container p-6 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 min-h-screen">
-      <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">Grocery List</h1>
+      <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
+        Grocery List
+      </h1>
       {groceryList.length > 0 ? (
         <div className="grocery-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
           {groceryList.map((item, index) => (
@@ -55,14 +57,20 @@ const Grocery = () => {
                 </div>
               </div>
               <div className="grocery-details p-6">
-                <h3 className="text-2xl font-semibold text-gray-800 mb-2">{item.displayName}</h3>
-                <p className="text-gray-600 text-lg">Count: {item.productCount}</p>
+                <h3 className="text-2xl font-semibold text-gray-800 mb-2">
+                  {item.displayName}
+                </h3>
+                <p className="text-gray-600 text-lg">
+                  Count: {item.productCount}
+                </p>
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <div className="text-gray-600 text-lg p-4 text-center">No grocery data available</div>
+        <div className="text-gray-600 text-lg p-4 text-center">
+          No grocery data available
+        </div>
       )}
     </div>
   );

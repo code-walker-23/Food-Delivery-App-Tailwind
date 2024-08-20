@@ -36,7 +36,6 @@ const AppLayout = () => {
     setUserName(data.name);
   }, []);
 
-  console.log(userName);
   const handleCart = () => {
     setCart(cart + 1);
   };

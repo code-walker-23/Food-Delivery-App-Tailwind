@@ -12,7 +12,7 @@ const Header = () => {
   const statusTextColor = onlineStatus ? "text-green-500" : "text-red-500";
   // subscribing to the store
   const cartItems = useSelector((store) => store.cart.items);
-  console.log("Cart Items", cartItems);
+
 
   return (
     <header className="bg-gray-900 text-white shadow-lg py-4 px-6">

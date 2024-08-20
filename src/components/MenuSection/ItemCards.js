@@ -7,8 +7,6 @@ import { addToCart } from "../../utils/cartSlice";
 
 const ItemCards = ({ items, onAddonsClick }) => {
   const dispatch = useDispatch();
-  console.log("Dispatch : ",dispatch);
-  console.log("Add to Cart : ",addToCart);
   const handleAddItems = (item) => {
     dispatch(addToCart(item));
   };

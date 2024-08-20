@@ -5,6 +5,5 @@ const appStore = configureStore({
     cart: cartReducer,
   },
 });
-console.log("AppStore",appStore);
 export default appStore;
 
