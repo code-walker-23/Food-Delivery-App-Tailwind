@@ -22,6 +22,7 @@ import UserContex from "./utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./pages/Cart";
+import UserList from "./components/HOC/UserList";
 
 const Grocery = lazy(() => import("./pages/Grocery"));
 const About = lazy(() => import("./pages/About"));
@@ -124,13 +125,15 @@ const appRouter = createBrowserRouter([
         path: "city/:cityName",
         element: <Body />,
       },
+      {
+        path: "userlist",
+        element: <UserList />,
+      },
     ],
     errorElement: <ErrorPage />,
   },
 ]);
 
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(<RouterProvider router={appRouter} />);
-
